@@ -10,10 +10,13 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2",
-    "bootstrap": "^4.0.0-beta.2",
+    "@fortawesome/fontawesome": "^1.1.5",
+    "@fortawesome/fontawesome-free-solid": "^5.0.9",
+    "@fortawesome/vue-fontawesome": "0.0.22",
+    "bootstrap": "^4.0.0",
     "bootstrap-vue": "latest",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "vue": "^2.5.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

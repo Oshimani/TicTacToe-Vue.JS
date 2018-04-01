@@ -1,28 +1,28 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+      <img src="./assets/logo.png">
+      <TicTacToe></TicTacToe>
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello'
+import TicTacToe from "./components/TicTacToe";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    Hello
+    TicTacToe
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
+  text-align: center;
   margin-top: 60px;
 }
 </style>
