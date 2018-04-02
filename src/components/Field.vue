@@ -25,7 +25,7 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 export default {
   name: "Field",
-  props: ["currentPlayer"],
+  props: ["currentPlayer", "coords"],
   data() {
     return {
       player: null,
@@ -36,7 +36,7 @@ export default {
     click: function() {
       // console.log("Clicked this tile");
       this.player = this.currentPlayer;
-      this.$emit("move-done");
+      this.$emit("move-done", { player: this.player, coords: this.coords });
     },
     iconFaTimes: function() {
       return faTimes;
