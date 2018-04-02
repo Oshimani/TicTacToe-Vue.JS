@@ -1,7 +1,7 @@
 <template>
-    <div v-bind:class="{'clicked': player !== null}"
+    <div v-bind:class="{'clicked': player !== null, 'winner': this.winner, 'disabled': !this.allowClick && !this.winner}"
         v-on:click="click()"
-        @mouseover="hover = true"
+        @mouseover="mouseEnter"
         @mouseleave="hover = false"
         class="field">
         <!-- Player 0 Icon -->
@@ -25,7 +25,7 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 export default {
   name: "Field",
-  props: ["currentPlayer", "coords"],
+  props: ["currentPlayer", "coords", "winnerTiles", "allowClick"],
   data() {
     return {
       player: null,
@@ -34,9 +34,13 @@ export default {
   },
   methods: {
     click: function() {
+      if (!this.allowClick) return;
       // console.log("Clicked this tile");
       this.player = this.currentPlayer;
       this.$emit("move-done", { player: this.player, coords: this.coords });
+    },
+    mouseEnter: function() {
+      if (this.allowClick) this.hover = true;
     },
     iconFaTimes: function() {
       return faTimes;
@@ -45,7 +49,17 @@ export default {
       return faCircle;
     }
   },
-  computed: {},
+  computed: {
+    winner: function() {
+      if (this.winnerTiles === undefined) return false;
+      console.log(this.winnerTiles);
+      return this.winnerTiles.findIndex(
+        wt => wt[0] === this.coords[0] && wt[1] === this.coords[1]
+      ) > -1
+        ? true
+        : false;
+    }
+  },
   components: {
     FontAwesomeIcon
   }
@@ -61,7 +75,7 @@ export default {
   border: 3px solid #348f66;
   border-radius: 5px;
 }
-.field:not(.clicked):hover {
+.field:not(.clicked):not(.disabled):hover {
   transform: scale(1.1);
 }
 .clicked {
@@ -76,5 +90,11 @@ export default {
 }
 .icon-dark {
   color: #2c3e50;
+}
+.winner .icon {
+  color: crimson !important;
+}
+.disabled {
+  transform: scale(0.9);
 }
 </style>
