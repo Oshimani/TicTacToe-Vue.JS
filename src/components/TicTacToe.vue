@@ -1,15 +1,16 @@
 <template>
   <div class="tictactoe">
+    <h3>Currently playing: {{currentPlayer}}</h3>
    <div class="grid-container">
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
-    <Field class="grid-item"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
+    <Field class="grid-item" v-bind:currentPlayer="currentPlayer" v-on:move-done="handleMoveDone()"/>  
    </div>
   </div>
 </template>
@@ -20,9 +21,16 @@ export default {
   name: "TicTacToe",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      currentPlayer: 0
     };
   },
+  methods: {
+    handleMoveDone: function() {
+      // console.log("Move done");
+      this.currentPlayer = this.currentPlayer === 0 ? 1 : 0;
+    }
+  },
+  computed: {},
   components: {
     Field
   }

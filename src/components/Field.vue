@@ -4,8 +4,16 @@
         @mouseover="hover = true"
         @mouseleave="hover = false"
         class="field">
-        <font-awesome-icon v-if="player !== null" class="icon" :icon="iconFaTimes()"/>
-        <font-awesome-icon v-if="hover && player === null" class="icon icon-dark" :icon="iconFaTimes()"/>
+        <!-- Player 0 Icon -->
+        <font-awesome-icon v-if="player === 0" class="icon" :icon="iconFaTimes()"/>
+        <!-- Player 0 Hover Icon -->
+        <font-awesome-icon v-if="hover && player === null && currentPlayer === 0" class="icon icon-dark" :icon="iconFaTimes()"/>
+        <!-- Player 1 Icon -->
+        <font-awesome-icon v-if="player === 1" class="icon" :icon="iconFaCircle()"/>
+        <!-- Player 1 Hover Icon -->
+        <font-awesome-icon v-if="hover && player === null && currentPlayer === 1" class="icon icon-dark" :icon="iconFaCircle()"/>
+        
+        
     </div>
 </template>
 <script>
@@ -17,6 +25,7 @@ import {
 } from "@fortawesome/fontawesome-free-solid";
 export default {
   name: "Field",
+  props: ["currentPlayer"],
   data() {
     return {
       player: null,
@@ -25,8 +34,9 @@ export default {
   },
   methods: {
     click: function() {
-      console.log("Clicked this tile");
-      this.player = true;
+      // console.log("Clicked this tile");
+      this.player = this.currentPlayer;
+      this.$emit("move-done");
     },
     iconFaTimes: function() {
       return faTimes;
