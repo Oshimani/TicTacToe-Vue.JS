@@ -12,8 +12,6 @@
         <font-awesome-icon v-if="player === 1" class="icon" :icon="iconFaCircle()"/>
         <!-- Player 1 Hover Icon -->
         <font-awesome-icon v-if="hover && player === null && currentPlayer === 1" class="icon icon-dark" :icon="iconFaCircle()"/>
-        
-        
     </div>
 </template>
 <script>
@@ -36,6 +34,7 @@ export default {
     click: function() {
       if (!this.allowClick) return;
       // console.log("Clicked this tile");
+      if (this.player != null) return;
       this.player = this.currentPlayer;
       this.$emit("move-done", { player: this.player, coords: this.coords });
     },
@@ -77,6 +76,7 @@ export default {
 }
 .field:not(.clicked):not(.disabled):hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
 .clicked {
   background-color: #2c3e50;
