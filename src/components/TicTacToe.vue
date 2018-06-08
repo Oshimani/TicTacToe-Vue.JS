@@ -1,6 +1,8 @@
 <template>
   <div class="tictactoe">
-    <h3>Currently playing: {{currentPlayer}}</h3>
+    <h3>Currently playing: 
+        <font-awesome-icon class="icon" :icon="getCurrentPlayerSymbol(currentPlayer)"/>
+    </h3>
    <div class="grid-container">
     <Field v-bind:coords="[0,0]" class="grid-item" v-bind:currentPlayer="currentPlayer" v-bind:winnerTiles="winnerTiles" v-bind:allowClick="!gameOver" v-on:move-done="handleMoveDone"/>  
     <Field v-bind:coords="[0,1]" class="grid-item" v-bind:currentPlayer="currentPlayer" v-bind:winnerTiles="winnerTiles" v-bind:allowClick="!gameOver" v-on:move-done="handleMoveDone"/>  
@@ -17,6 +19,8 @@
 
 <script>
 import Field from "./Field";
+import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
+import { faTimes, faCircle } from "@fortawesome/fontawesome-free-solid";
 export default {
   name: "TicTacToe",
   data() {
@@ -43,6 +47,15 @@ export default {
     };
   },
   methods: {
+    getCurrentPlayerSymbol: function(currentPlayer) {
+      if (currentPlayer === 0) {
+        return faTimes;
+      }
+      return faCircle;
+    },
+    iconFaTimes: function() {
+      return faTimes;
+    },
     handleMoveDone: function(e) {
       // console.log(
       //   "Player: " +
@@ -272,7 +285,7 @@ export default {
     }
   },
   components: {
-    Field
+    Field, FontAwesomeIcon
   }
 };
 </script>

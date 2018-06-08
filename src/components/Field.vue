@@ -18,8 +18,7 @@
 import FontAwesomeIcon from "@fortawesome/vue-fontawesome";
 import {
   faTimes,
-  faCircle,
-  faTimesCircle
+  faCircle
 } from "@fortawesome/fontawesome-free-solid";
 export default {
   name: "Field",
