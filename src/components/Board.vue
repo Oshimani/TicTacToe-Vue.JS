@@ -1,7 +1,14 @@
 <template>
   <div class="tictactoe">
-    <h3>Currently playing: 
-        <font-awesome-icon class="icon" :icon="getCurrentPlayerSymbol(currentPlayer)"/>
+    <h3>
+      <span v-if="winnerTiles.length === 0">
+         Currently playing: 
+      </span>
+      <span v-if="winnerTiles.length > 0">
+         Winner: 
+      </span>
+      <font-awesome-icon v-if="winnerTiles.length === 0" class="icon" :icon="getCurrentPlayerSymbol(currentPlayer)"/>
+      <font-awesome-icon v-if="winnerTiles.length > 0" class="icon" :icon="getCurrentPlayerSymbol(winner)"/>
     </h3>
    <div class="grid-container">
     <Field v-bind:coords="[0,0]" class="grid-item" v-bind:currentPlayer="currentPlayer" v-bind:winnerTiles="winnerTiles" v-bind:allowClick="!gameOver" v-on:move-done="handleMoveDone"/>  
@@ -26,6 +33,7 @@ export default {
   data() {
     return {
       currentPlayer: 0,
+      winner: null,
       field: [
         [
           { coords: [0, 0], player: null },
@@ -74,6 +82,8 @@ export default {
         console.warn("Player " + e.player + " won!");
         console.log(winScenario.tiles);
         this.winnerTiles = winScenario.tiles;
+        this.winner = e.player;
+        this.$emit("round-ended", e.player);
         return;
       }
       winScenario = this.checkCol(e);
@@ -81,6 +91,8 @@ export default {
         console.warn("Player " + e.player + " won!");
         console.log(winScenario.tiles);
         this.winnerTiles = winScenario.tiles;
+        this.winner = e.player;
+        this.$emit("round-ended", e.player);
         return;
       }
       winScenario = this.checkDiagTLBR(e);
@@ -88,6 +100,8 @@ export default {
         console.warn("Player " + e.player + " won!");
         console.log(winScenario.tiles);
         this.winnerTiles = winScenario.tiles;
+        this.winner = e.player;
+        this.$emit("round-ended", e.player);
         return;
       }
       winScenario = this.checkDiagBLTR(e);
@@ -95,6 +109,8 @@ export default {
         console.warn("Player " + e.player + " won!");
         console.log(winScenario.tiles);
         this.winnerTiles = winScenario.tiles;
+        this.winner = e.player;
+        this.$emit("round-ended", e.player);
         return;
       }
     },
@@ -290,6 +306,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+h3 {
+  margin-bottom: 0px;
+}
 a {
   color: #42b983;
 }

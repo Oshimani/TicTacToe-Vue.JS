@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="board-list">
-            <Board class="board" v-for="board in boards" v-bind:key="board.index"></Board>
+            <Board v-on:round-ended="handleRoundEnded" class="board" v-for="board in boards" v-bind:key="board.index"></Board>
         </div>
         <div class="footer">
-            <button class="button" v-on:click="clickNewGame()">Neues Spiel</button>
+            <button class="button" v-on:click="clickNewGame()">Next Round</button>
         </div>
     </div>
 </template>
@@ -19,27 +19,35 @@ export default {
   },
   data() {
     return {
-        index:1,
-      boards: [{index:0}]
+      index: 1,
+      score: [0, 0],
+      boards: [{ index: 0, winner: null }]
     };
   },
   methods: {
     clickNewGame: function() {
       console.log("New Game");
-      this.boards.unshift({index:this.index});
+      this.boards.unshift({ index: this.index });
       this.index++;
+    },
+    handleRoundEnded: function(winner) {
+      this.score[winner]++;
+      this.$emit('new-score',this.score);
     }
   }
 };
 </script>
 
 <style>
-.board:not(:first-of-type){
-    /* background-color: #c4c4c4; */
-    filter: blur(2px);
+.board {
+  margin-bottom: 25px;
 }
-.board:first-of-type{
-    border-bottom: 3px solid #2c3e50;
+.board:not(:first-of-type) {
+  /* background-color: #c4c4c4; */
+  filter: blur(2px);
+}
+.board:first-of-type {
+  border-bottom: 3px solid #2c3e50;
 }
 .button {
   border-radius: 5px;
@@ -54,15 +62,15 @@ export default {
   background-color: #2c3e50;
   color: #42b983;
 }
-.board-list{
-    margin-bottom: 68px;
+.board-list {
+  margin-bottom: 68px;
 }
-.footer{
-    position:fixed;
-    bottom: 0px;
-    background-color: #42b983;
-    border-top: 3px solid #2c3e50;
-    width:100%;
-    padding: 10px;
+.footer {
+  position: fixed;
+  bottom: 0px;
+  background-color: #42b983;
+  border-top: 3px solid #2c3e50;
+  width: 100%;
+  padding: 10px;
 }
 </style>

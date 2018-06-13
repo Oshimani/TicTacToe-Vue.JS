@@ -50,7 +50,7 @@ export default {
   computed: {
     winner: function() {
       if (this.winnerTiles === undefined) return false;
-      console.log(this.winnerTiles);
+      // console.log(this.winnerTiles);
       return this.winnerTiles.findIndex(
         wt => wt[0] === this.coords[0] && wt[1] === this.coords[1]
       ) > -1
