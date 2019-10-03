@@ -1,5 +1,7 @@
 # tictactoe
 
+https://oshimani.github.io/TicTacToe-Vue.JS/
+
 > A Vue.js project
 
 ## Build Setup
